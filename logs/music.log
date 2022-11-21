@@ -1,0 +1,140 @@
+[2022-06-19 03:53:07,404] Function leave_ - ERROR 880704270838669322
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 260, in leave_
+    del self.queue[ctx.guild.id]
+KeyError: 880704270838669322
+[2022-06-19 03:56:37,282] Function leave_ - ERROR 880704270838669322
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 260, in leave_
+    del self.queue[ctx.guild.id]
+KeyError: 880704270838669322
+[2022-06-19 03:57:45,571] Function leave_ - ERROR 880704270838669322
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 260, in leave_
+    del self.queue[ctx.guild.id]
+KeyError: 880704270838669322
+[2022-06-19 03:58:43,265] Function leave_ - ERROR 880704270838669322
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 248, in leave_
+    del self.queue[ctx.guild.id]
+KeyError: 880704270838669322
+[2022-06-19 04:13:43,288] Function play_ - ERROR addQueue() takes 2 positional arguments but 3 were given
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 136, in play_
+    self.queue[ctx.guild.id].addQueue(source, {})
+KeyError: 880704270838669322
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 139, in play_
+    self.queue[ctx.guild.id].addQueue(source, {})
+TypeError: addQueue() takes 2 positional arguments but 3 were given
+[2022-06-20 01:29:15,271] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 122, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-06-20 01:29:36,658] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 122, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-06-20 01:30:08,938] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 122, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-06-20 01:30:30,124] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 122, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-06-20 01:36:29,560] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 122, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-06-20 01:37:19,537] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 122, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-06-20 08:46:29,776] Function leave_ - ERROR 429 Too Many Requests (error code: 0): You are being blocked from accessing our API temporarily due to exceeding our rate limits frequently. Please read our docs at https://discord.com/developers/docs/topics/rate-limits to prevent this moving forward.
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 253, in leave_
+    await ctx.send("**Dadah** 👋🏻")
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/discord/abc.py", line 1065, in send
+    data = await state.http.send_message(channel.id, content, tts=tts, embed=embed,
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/discord/http.py", line 216, in request
+    raise HTTPException(r, data)
+discord.errors.HTTPException: 429 Too Many Requests (error code: 0): You are being blocked from accessing our API temporarily due to exceeding our rate limits frequently. Please read our docs at https://discord.com/developers/docs/topics/rate-limits to prevent this moving forward.
+[2022-06-30 14:57:06,668] Function play_ - ERROR Not connected to voice.
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 163, in play_
+    voice_client.play(self.queue[ctx.guild.id].getSource(0), after = lambda e: play_next(self, ctx, self.queue[ctx.guild.id]))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/discord/voice_client.py", line 555, in play
+    raise ClientException('Not connected to voice.')
+discord.errors.ClientException: Not connected to voice.
+[2022-07-03 16:43:46,404] Function play_ - ERROR Not connected to voice.
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 163, in play_
+    voice_client.play(self.queue[ctx.guild.id].getSource(0), after = lambda e: play_next(self, ctx, self.queue[ctx.guild.id]))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/discord/voice_client.py", line 555, in play
+    raise ClientException('Not connected to voice.')
+discord.errors.ClientException: Not connected to voice.
+[2022-07-13 16:32:40,495] Function play_next - INFO 'NoneType' object has no attribute 'is_playing'
+[2022-08-08 15:44:33,625] Function play_next - INFO 'NoneType' object has no attribute 'is_playing'
+[2022-08-11 14:01:26,458] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 141, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 65, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-08-11 15:06:40,672] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 141, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 65, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-08-19 15:39:44,728] Function play_ - ERROR 'dict' object has no attribute 'append'
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 155, in play_
+    self.queue[ctx.guild.id].addQueue(source)
+KeyError: 700552378549796946
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 157, in play_
+    self.queue.append(ctx.guild.id)
+AttributeError: 'dict' object has no attribute 'append'
+[2022-08-19 15:45:55,097] Function play_next - INFO 'NoneType' object has no attribute 'is_playing'
+[2022-08-19 16:44:09,574] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 65, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2022-08-19 16:45:34,819] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 65, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
