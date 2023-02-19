@@ -55,14 +55,20 @@ class YTDLSource(discord.PCMVolumeTransformer):
     self.channel = data.get('channel')
     self.thumbnail = data.get('thumbnail')
 
-  # Class method for processing video
-  @classmethod
-  async def from_url(cls, url, *, loop=None, stream=False):
+  async def search(inp, *, loop=None, multiple=False):
     loop = loop or asyncio.get_event_loop()
     # Exctract information from url/search
     data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
     if 'entries' in data:
       data = data['entries'][0]
+    
+    print(data)
+    return data
+
+  # Class method for processing video
+  @classmethod
+  async def from_url(cls, url, *, loop=None, stream=False):
+    data = await self.search(url, loop)
     filename = data['url'] if stream else ytdl.prepare_filename(data)
     # Returning object class
     return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
@@ -137,15 +143,16 @@ class music(commands.Cog):
     try:
       # Get audio source
       source = await YTDLSource.from_url(music, loop=self.client.loop, stream=True)
-      title = source.title
-      url2 = source.url
-      username = source.channel
-      thumbnail = source.thumbnail
-      
+
       # Sending Embed
-      embed = discord.Embed(title=title, url=url2, description="Requested by {}".format(interaction.user.display_name), color=0xebd234)
-      embed.set_author(name=username)
-      embed.set_image(url=thumbnail)
+      embed = discord.Embed(
+        title=source.title, 
+        url=source.url, 
+        description="Requested by {}".format(interaction.user.display_name), 
+        color=0xebd234)
+      embed.set_author(name=source.channel)
+      embed.set_image(url=source.thumbnail)
+
       await interaction.followup.send(embed=embed)
 
       # Appending audio source to queue

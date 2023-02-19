@@ -4,3 +4,5 @@ __pycache__/
 *$py.class
 db.json
 myAnimeList.json
+database.py
+database.db
