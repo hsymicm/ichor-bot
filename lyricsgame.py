@@ -185,5 +185,5 @@ class lyricsgame(commands.Cog):
     embed_list.set_author(name=self.gameTitle)
     await ctx.send(ctx.author.mention, embed=embed_list)
     
-def setup(client):
-  client.add_cog(lyricsgame(client, Lyrics("lyrics_game/lyrics/")))
+async def setup(client):
+  await client.add_cog(lyricsgame(client, Lyrics("lyrics_game/lyrics/")))

@@ -4,9 +4,6 @@ import discord
 from discord.ext import commands
 import time 
 import os
-import lxml
-import cchardet
-import asyncio
 from gacha import gachaChar, gachaWep
 from inventory import inv
 from encrypt import load, save
@@ -113,13 +110,9 @@ class genshin_fun(commands.Cog):
   async def wish(self, ctx, *, inp):
     inp.lower()
     thumb = 'https://cdn.discordapp.com/attachments/880704270838669325/907214236294475876/256.png'
-
-    # start_time_load = time.time()
-    # print("==========================\nLoad :\n--- %s ms ---" % ((time.time() - start_time_load)*1000))
     uid = str(ctx.author.id)
     data = sb.getInventory(uid)
     async def send(arr, pull, db):
-      # start_time_embed = time.time()
       embed2 = discord.Embed(title=f"Genshin Wish Simulator", color=0xebd234)
       embed2.add_field(name=f"★ {inp.capitalize()} ★", value="Wishing 10 Pull", inline=False)
       embed2.add_field(name=stripes(50), value='\u200b', inline=False)
@@ -127,9 +120,6 @@ class genshin_fun(commands.Cog):
       file = discord.File(arr, filename="image.png")
       embed2.set_image(url="attachment://image.png")
       await ctx.send(ctx.author.mention, file=file, embed=embed2)
-      # print("Embed :\n--- %s ms ---" % ((time.time() - start_time_embed)*1000))
-
-      # start_time_append = time.time()
       for item in pull:
         item = item.replace('\\', '/').split('/')[-1].split('.')[0]
         if item in char_5s:
@@ -140,8 +130,6 @@ class genshin_fun(commands.Cog):
           if item not in db['inventory']['4s']:
             db['inventory']['4s'][item] = 0
           db['inventory']['4s'][item] += 1
-      # print("Appending :\n--- %s ms ---" % ((time.time() - start_time_append)*1000))
-      print("TEST")
       sb.updateInventory(uid, db)
       
           
@@ -157,14 +145,12 @@ class genshin_fun(commands.Cog):
       embed2 = discord.Embed(title=f"Genshin Wish Simulator", color=0xebd234)
       try:
         arr = inv(data['inventory'])
-        # start_time_embed = time.time()
         embed2.add_field(name=f"★ Wish Inventory ★", value=f"{ctx.author.display_name}'s Inventory", inline=False)
         embed2.add_field(name=stripes(50), value='\u200b', inline=False)
         embed2.set_thumbnail(url=thumb)
         file = discord.File(arr, filename="image.png")
         embed2.set_image(url="attachment://image.png")
         await ctx.send(ctx.author.mention, file=file, embed=embed2)
-        # print("Embed :\n--- %s ms ---" % ((time.time() - start_time_embed)*1000))
       except ValueError as err:
         embed2.add_field(name=f"★ Wish Inventory ★", value=f"<!>{ctx.author.display_name}'s {err}<!>", inline=False)
         embed2.add_field(name=stripes(50), value='\u200b', inline=False)
@@ -185,10 +171,6 @@ class genshin_fun(commands.Cog):
       embed2.set_thumbnail(url=thumb)
       await ctx.send(ctx.author.mention, embed=embed2)
       
-    # start_time_save = time.time()
-    # save('db.json', root)
-    # print("Saving :\n--- %s ms ---\n==========================" % ((time.time() - start_time_save)*1000))
-  
-def setup(client):
-  client.add_cog(genshin_fun(client))
+async def setup(client):
+  await client.add_cog(genshin_fun(client))
   

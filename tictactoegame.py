@@ -118,5 +118,5 @@ class tictactoegame(commands.Cog):
         await ctx.send("Game draw! Thanks for playing.")
         break
         
-def setup(client):
-  client.add_cog(tictactoegame(client, Tictactoe()))
+async def setup(client):
+  await client.add_cog(tictactoegame(client, Tictactoe()))

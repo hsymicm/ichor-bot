@@ -66,5 +66,5 @@ class genshin_stats(commands.Cog):
     embed5.set_thumbnail(url=icon)
     await ctx.send(ctx.author.mention, embed=embed5)
   
-def setup(client):
-  client.add_cog(genshin_stats(client, genshin.GenshinClient()))
+async def setup(client):
+  await client.add_cog(genshin_stats(client, genshin.GenshinClient()))

@@ -3,7 +3,6 @@ from discord.ext import commands
 import asyncio
 import yt_dlp as ydl
 import time
-import json
 import logging
 
 # Logging config
@@ -155,10 +154,8 @@ class music(commands.Cog):
         except:
           self.queue[ctx.guild.id] = player()
           self.queue[ctx.guild.id].addQueue(source)
-
-        print(self.queue)
+          
         # Playing the source audio or adding to queue
-        
         if not voice_client.is_playing():
           voice_client.play(self.queue[ctx.guild.id].getSource(0), after = lambda e: play_next(self, ctx, self.queue[ctx.guild.id]))
         else:
@@ -265,5 +262,5 @@ class music(commands.Cog):
       return False
     else:
       return True
-def setup(client):
-  client.add_cog(music(client))
+async def setup(client):
+  await client.add_cog(music(client))

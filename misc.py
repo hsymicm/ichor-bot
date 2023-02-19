@@ -18,6 +18,18 @@ class misc(commands.Cog):
     self.yellow = 0xebd234
 
   @commands.command()
+  async def sync(self, ctx):
+    if(str(ctx.guild.id) != "880704270838669322"):
+      await ctx.send(f"Invalid Guild {ctx.guild.id}")
+      return
+      
+    try:
+      synced = await self.client.tree.sync()
+      await ctx.send(f"Synced {len(synced)} command(s)")
+    except Exception as e:
+      print(e)
+  
+  @commands.command()
   async def stats(self, ctx):
     embed=discord.Embed(title="Status Bot", description="Monitoring resource, versi API, dll.", color=self.yellow)
     embed.add_field(name=stripes(50), value='\u200b', inline=False)
@@ -95,5 +107,5 @@ class misc(commands.Cog):
     embed.add_field(name='Anime Schedule', value="```>schedule    ```", inline=True)
     await ctx.send(embed=embed)
     
-def setup(client):
-  client.add_cog(misc(client))
+async def setup(client):
+  await client.add_cog(misc(client))

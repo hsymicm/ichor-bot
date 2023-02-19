@@ -138,3 +138,450 @@ Traceback (most recent call last):
   File "/home/runner/DiscordBot/music.py", line 65, in from_url
     data = data['entries'][0]
 IndexError: list index out of range
+[2023-02-01 17:44:46,051] Function play_ - ERROR Not connected to voice.
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 163, in play_
+    voice_client.play(self.queue[ctx.guild.id].getSource(0), after = lambda e: play_next(self, ctx, self.queue[ctx.guild.id]))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/discord/voice_client.py", line 555, in play
+    raise ClientException('Not connected to voice.')
+discord.errors.ClientException: Not connected to voice.
+[2023-02-02 13:43:13,865] Function play_ - ERROR argument of type 'NoneType' is not iterable
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 64, in from_url
+    if 'entries' in data:
+TypeError: argument of type 'NoneType' is not iterable
+[2023-02-03 14:11:14,910] Function play_next - INFO 'NoneType' object has no attribute 'is_playing'
+[2023-02-04 15:21:55,065] Function play_ - ERROR Not connected to voice.
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 163, in play_
+    voice_client.play(self.queue[ctx.guild.id].getSource(0), after = lambda e: play_next(self, ctx, self.queue[ctx.guild.id]))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/discord/voice_client.py", line 555, in play
+    raise ClientException('Not connected to voice.')
+discord.errors.ClientException: Not connected to voice.
+[2023-02-10 14:46:20,245] Function play_ - ERROR argument of type 'NoneType' is not iterable
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 64, in from_url
+    if 'entries' in data:
+TypeError: argument of type 'NoneType' is not iterable
+[2023-02-17 11:17:26,006] Function play_ - ERROR [0;31mERROR:[0m [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 597, in extract
+    ie_result = self._real_extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/youtube.py", line 2862, in _real_extract
+    'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 1171, in _search_regex
+    raise RegexNotFoundError('Unable to extract %s' % _name)
+yt_dlp.utils.RegexNotFoundError: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1398, in __extract_info
+    ie_result = ie.extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 623, in extract
+    raise type(e)(e.msg, **kwargs)
+yt_dlp.utils.RegexNotFoundError: [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/usr/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/runner/DiscordBot/music.py", line 63, in <lambda>
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1412, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1530, in process_ie_result
+    return self.__process_playlist(ie_result, download)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1712, in __process_playlist
+    entry_result = self.__process_iterable_entry(entry, download, extra)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1732, in __process_iterable_entry
+    return self.process_ie_result(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1481, in process_ie_result
+    return self.extract_info(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1338, in wrapper
+    self.report_error(compat_str(e), e.format_traceback())
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 902, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', tb)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 843, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: [0;31mERROR:[0m [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+[2023-02-17 11:17:35,171] Function play_ - ERROR [0;31mERROR:[0m [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 597, in extract
+    ie_result = self._real_extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/youtube.py", line 2862, in _real_extract
+    'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 1171, in _search_regex
+    raise RegexNotFoundError('Unable to extract %s' % _name)
+yt_dlp.utils.RegexNotFoundError: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1398, in __extract_info
+    ie_result = ie.extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 623, in extract
+    raise type(e)(e.msg, **kwargs)
+yt_dlp.utils.RegexNotFoundError: [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/usr/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/runner/DiscordBot/music.py", line 63, in <lambda>
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1412, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1530, in process_ie_result
+    return self.__process_playlist(ie_result, download)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1712, in __process_playlist
+    entry_result = self.__process_iterable_entry(entry, download, extra)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1732, in __process_iterable_entry
+    return self.process_ie_result(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1481, in process_ie_result
+    return self.extract_info(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1338, in wrapper
+    self.report_error(compat_str(e), e.format_traceback())
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 902, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', tb)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 843, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: [0;31mERROR:[0m [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+[2023-02-17 11:17:52,604] Function play_ - ERROR [0;31mERROR:[0m [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 597, in extract
+    ie_result = self._real_extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/youtube.py", line 2862, in _real_extract
+    'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 1171, in _search_regex
+    raise RegexNotFoundError('Unable to extract %s' % _name)
+yt_dlp.utils.RegexNotFoundError: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1398, in __extract_info
+    ie_result = ie.extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 623, in extract
+    raise type(e)(e.msg, **kwargs)
+yt_dlp.utils.RegexNotFoundError: [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/usr/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/runner/DiscordBot/music.py", line 63, in <lambda>
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1412, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1530, in process_ie_result
+    return self.__process_playlist(ie_result, download)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1712, in __process_playlist
+    entry_result = self.__process_iterable_entry(entry, download, extra)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1732, in __process_iterable_entry
+    return self.process_ie_result(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1481, in process_ie_result
+    return self.extract_info(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1338, in wrapper
+    self.report_error(compat_str(e), e.format_traceback())
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 902, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', tb)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 843, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: [0;31mERROR:[0m [youtube] 11cta61wi0g: Unable to extract [0;94muploader id[0m
+[2023-02-17 11:25:08,371] Function play_ - ERROR [0;31mERROR:[0m [youtube] a51VH9BYzZA: Unable to extract [0;94muploader id[0m
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 597, in extract
+    ie_result = self._real_extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/youtube.py", line 2862, in _real_extract
+    'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 1171, in _search_regex
+    raise RegexNotFoundError('Unable to extract %s' % _name)
+yt_dlp.utils.RegexNotFoundError: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1398, in __extract_info
+    ie_result = ie.extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 623, in extract
+    raise type(e)(e.msg, **kwargs)
+yt_dlp.utils.RegexNotFoundError: [youtube] a51VH9BYzZA: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/usr/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/runner/DiscordBot/music.py", line 63, in <lambda>
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1412, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1530, in process_ie_result
+    return self.__process_playlist(ie_result, download)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1712, in __process_playlist
+    entry_result = self.__process_iterable_entry(entry, download, extra)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1732, in __process_iterable_entry
+    return self.process_ie_result(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1481, in process_ie_result
+    return self.extract_info(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1338, in wrapper
+    self.report_error(compat_str(e), e.format_traceback())
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 902, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', tb)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 843, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: [0;31mERROR:[0m [youtube] a51VH9BYzZA: Unable to extract [0;94muploader id[0m
+[2023-02-17 11:27:25,188] Function play_ - ERROR [0;31mERROR:[0m [youtube] a51VH9BYzZA: Unable to extract [0;94muploader id[0m
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 597, in extract
+    ie_result = self._real_extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/youtube.py", line 2862, in _real_extract
+    'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 1171, in _search_regex
+    raise RegexNotFoundError('Unable to extract %s' % _name)
+yt_dlp.utils.RegexNotFoundError: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1398, in __extract_info
+    ie_result = ie.extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 623, in extract
+    raise type(e)(e.msg, **kwargs)
+yt_dlp.utils.RegexNotFoundError: [youtube] a51VH9BYzZA: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/usr/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/runner/DiscordBot/music.py", line 63, in <lambda>
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1412, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1530, in process_ie_result
+    return self.__process_playlist(ie_result, download)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1712, in __process_playlist
+    entry_result = self.__process_iterable_entry(entry, download, extra)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1732, in __process_iterable_entry
+    return self.process_ie_result(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1481, in process_ie_result
+    return self.extract_info(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1338, in wrapper
+    self.report_error(compat_str(e), e.format_traceback())
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 902, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', tb)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 843, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: [0;31mERROR:[0m [youtube] a51VH9BYzZA: Unable to extract [0;94muploader id[0m
+[2023-02-17 11:28:24,217] Function play_ - ERROR [0;31mERROR:[0m [youtube] ReJsfzGeIXE: Unable to extract [0;94muploader id[0m
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 597, in extract
+    ie_result = self._real_extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/youtube.py", line 2862, in _real_extract
+    'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 1171, in _search_regex
+    raise RegexNotFoundError('Unable to extract %s' % _name)
+yt_dlp.utils.RegexNotFoundError: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1398, in __extract_info
+    ie_result = ie.extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 623, in extract
+    raise type(e)(e.msg, **kwargs)
+yt_dlp.utils.RegexNotFoundError: [youtube] ReJsfzGeIXE: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/usr/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/runner/DiscordBot/music.py", line 63, in <lambda>
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1412, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1530, in process_ie_result
+    return self.__process_playlist(ie_result, download)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1712, in __process_playlist
+    entry_result = self.__process_iterable_entry(entry, download, extra)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1732, in __process_iterable_entry
+    return self.process_ie_result(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1481, in process_ie_result
+    return self.extract_info(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1338, in wrapper
+    self.report_error(compat_str(e), e.format_traceback())
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 902, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', tb)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 843, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: [0;31mERROR:[0m [youtube] ReJsfzGeIXE: Unable to extract [0;94muploader id[0m
+[2023-02-17 11:34:40,031] Function play_ - ERROR [0;31mERROR:[0m [youtube] ReJsfzGeIXE: Unable to extract [0;94muploader id[0m
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 597, in extract
+    ie_result = self._real_extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/youtube.py", line 2862, in _real_extract
+    'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 1171, in _search_regex
+    raise RegexNotFoundError('Unable to extract %s' % _name)
+yt_dlp.utils.RegexNotFoundError: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1398, in __extract_info
+    ie_result = ie.extract(url)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/extractor/common.py", line 623, in extract
+    raise type(e)(e.msg, **kwargs)
+yt_dlp.utils.RegexNotFoundError: [youtube] ReJsfzGeIXE: Unable to extract [0;94muploader id[0m
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 63, in from_url
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/usr/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/runner/DiscordBot/music.py", line 63, in <lambda>
+    data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1412, in __extract_info
+    return self.process_ie_result(ie_result, download, extra_info)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1530, in process_ie_result
+    return self.__process_playlist(ie_result, download)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1712, in __process_playlist
+    entry_result = self.__process_iterable_entry(entry, download, extra)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1329, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1732, in __process_iterable_entry
+    return self.process_ie_result(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1481, in process_ie_result
+    return self.extract_info(
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1321, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(ie_key), download, extra_info, process)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 1338, in wrapper
+    self.report_error(compat_str(e), e.format_traceback())
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 902, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', tb)
+  File "/opt/virtualenvs/python3/lib/python3.8/site-packages/yt_dlp/YoutubeDL.py", line 843, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: [0;31mERROR:[0m [youtube] ReJsfzGeIXE: Unable to extract [0;94muploader id[0m
+[2023-02-17 15:11:02,858] Function play_ - ERROR list index out of range
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music.py", line 140, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music.py", line 65, in from_url
+    data = data['entries'][0]
+IndexError: list index out of range
+[2023-02-18 10:47:12,916] Function play_ - ERROR local variable 'data' referenced before assignment
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music3.py", line 185, in play_
+    source = await YTDLSource.from_url(inp, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music3.py", line 62, in from_url
+    if 'entries' in data:
+UnboundLocalError: local variable 'data' referenced before assignment
+[2023-02-18 11:23:29,323] Function listen - ERROR 'NoneType' object has no attribute 'is_playing'
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music3.py", line 158, in listen
+    if not voice_client.is_playing():
+AttributeError: 'NoneType' object has no attribute 'is_playing'

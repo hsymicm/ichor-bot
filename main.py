@@ -1,8 +1,9 @@
 import os
 import discord
 from discord.ext import commands, tasks
-import otaku, music, misc, genshin_fun, genshin_stats, lyricsgame, tictactoegame
+import otaku, music3, misc, genshin_fun, genshin_stats, lyricsgame, tictactoegame
 import keep_alive
+import asyncio
 from itertools import cycle
 
 cogs = [
@@ -11,7 +12,7 @@ cogs = [
   genshin_stats, 
   lyricsgame, 
   tictactoegame,
-  music, 
+  music3, 
   misc
 ]
 
@@ -41,7 +42,7 @@ async def on_ready():
   change_status.start()
   print("Your bot is ready")
   for i in range(len(cogs)):
-    cogs[i].setup(client)
+    await cogs[i].setup(client)
 
 @client.event
 async def on_command_error(ctx, error):
@@ -51,10 +52,15 @@ async def on_command_error(ctx, error):
   else:
     print(error)
 
+async def main():
+  async with client:
+    my_secret = os.environ['TOKEN']
+    await client.start(my_secret)
+
 repl_link = 'https://DiscordBot.fadilhisyam.repl.co'
 keep_alive.awake(repl_link, True)
-my_secret = os.environ['TOKEN']
+
 try:
-  client.run(my_secret)
+  asyncio.run(main())
 except:
   os.system("kill 1")

@@ -675,5 +675,5 @@ class otaku (commands.Cog):
     await message.edit(embed = embed1)
 
 # Cog Setup
-def setup(client):
-  client.add_cog(otaku(client, Anilist()))
+async def setup(client):
+  await client.add_cog(otaku(client, Anilist()))

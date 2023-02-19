@@ -1,0 +1,6 @@
+__pycache__/
+.cache/
+*.py[cod]
+*$py.class
+db.json
+myAnimeList.json
