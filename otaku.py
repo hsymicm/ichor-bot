@@ -1,6 +1,7 @@
 import discord
 import datetime, pytz, re, time, os, json, sys
 from discord.ext import commands
+from discord import app_commands
 from AnilistPython import Anilist
 from encrypt import load, save
 import asyncio
@@ -42,6 +43,9 @@ def check_date(date, format):
   except ValueError:
     return "-"
 
+def check_null(data):
+  return True if data in [None, "null", "-"] else False
+  
 # Embed page function
 def embeds(author, color, page, content, split, page_title ,title=None, thumb=None):
   strings = ""
@@ -76,74 +80,87 @@ class otaku (commands.Cog):
     )
     embed.set_author(name=author)
     return embed
-  
-  @commands.group(invoke_without_command=True)
-  @commands.cooldown(12,300,commands.BucketType.user)
-  async def search(self, ctx):
-    if ctx.invoked_subcommand is None:
-      await ctx.send("**Invalid Sub Commands!** 🚫")
-      await ctx.invoke(self.client.get_command('help otaku'))
-  @search.command(name='anime', aliases=['animek', 'ani', 'show'])
-  async def _anime(self, ctx, *, inp):
-    author = "Anime Search"
-    message = await ctx.send(
-      ctx.author.mention, 
-      embed=self.create_search_embed(author, inp)
-    )
+
+  @app_commands.command(name="search", description="Search anime/manga titles.")
+  @app_commands.choices(type=[
+    app_commands.Choice(name="Anime", value="anime"),
+    app_commands.Choice(name="Manga", value="manga"),
+  ])
+  @app_commands.describe(title="Input anime/manga title.")
+  @app_commands.checks.cooldown(12, 300, key=lambda i: (i.guild_id, i.user.id))
+  async def search(self, interaction: discord.Interaction, type: app_commands.Choice[str], title: str) -> None:
+    await interaction.response.defer()
+
+    msg = await interaction.followup.send(
+        interaction.user.mention, 
+        embed=self.create_search_embed(f"{type.name} Search",  title),
+        wait=True
+      )
+
     try:
-      # Searching
-      aniDict = clean_dict(self.anilist.get_anime(inp))
-      
-      # Processing Information
-      name_romaji = aniDict['name_romaji']
-      name_english = aniDict['name_english']
-      if name_english != "-":
-        name = name_english
-      else:
-        name = name_romaji
-      desc = truncate(clean_tags(aniDict['desc']), 125)
-      score = aniDict['average_score']
-      score = round(int(score)/10, 2) if score != "-" else "-"
-      thumb = aniDict['cover_image']
-      banner = aniDict['banner_image']
-      eps = aniDict['airing_episodes']
-      status = aniDict['airing_status'].lower().capitalize().replace("_", " ")
-      genre = aniDict['genres'] if len(aniDict['genres']) != 0 else "-"
-      next_ep = aniDict['next_airing_ep']
-      date = aniDict['starting_time'].split('/')
-      date = date[-1] if date != None else "-"
-      season = aniDict['season']
-      type = ""
-      if season in [None, "null", "-",] or date in [None, "null", "-"]:
-        type = "-"
-      elif date in [None, "null", "-"]:
-        type = f"{season.lower().capitalize()}"
-      else:
-        type = f"{season.lower().capitalize()} {date.split('/')[-1]}"
+      with HiddenPrints():
+        if(type.value == 'manga'):
+          data = clean_dict(self.anilist.get_manga(title))
+        else:
+          data = clean_dict(self.anilist.get_anime(title))
   
-      # Editted Embed
+      name = data['name_english'] if data['name_english'] != "-" else data['name_romaji']
+      desc = truncate(clean_tags(data['desc']), 125)
+      score = round(int(data['average_score'])/10, 2) if data['average_score'] != "-" else "-"
+      thumb = data['cover_image']
+      banner = data['banner_image']
+      genre = data['genres'] if len(data['genres']) != 0 else "-"
+      status = data['release_status' if type.value == "manga" else 'airing_status'].lower().capitalize().replace("_", " ")
+  
+      if(type.value == 'manga'):
+        volume = data['volumes']
+        format = data['release_format'].lower().capitalize().replace("_", " ")
+      else:
+        eps = data['airing_episodes']
+        next_ep = data['next_airing_ep']
+        date = data['starting_time'].split('/')
+        date = date[-1] if date != None else "-"
+        season = data['season']
+        if check_null(season) or check_null(date):
+          season = "-"
+        else:
+          season = f"{season.lower().capitalize()} {'' if check_null(date) else date.split('/')[-1]}"
+
       embed = discord.Embed(
         title=name, 
         description=desc, 
         color=self.yellow
       )
-      embed.set_author(name=author)
+      embed.set_author(name=f"{type.name} Search")
       if thumb != "-":
         embed.set_thumbnail(url=thumb)
       if banner != "-":
         embed.set_image(url=banner)
-      embed.add_field(name="Season", value=type, inline=True)
+  
+      embed.add_field(
+        name="Format" if type.value == "manga" else "Season",
+        value=format if type.value == "manga" else season,
+        inline=True)
+      
       embed.add_field(name="Score", value=f"{score}/10", inline=True)
-      embed.add_field(name="Episodes", value=eps, inline=True)
+      
+      embed.add_field(
+        name="Volume" if type.value == "manga" else "Episodes",
+        value=volume if type.value == "manga" else eps,
+        inline=True)
+      
       embed.add_field(name="Genre", value=', '.join(genre), inline=False)
       embed.add_field(name="Status", value=status, inline=True)
-      if next_ep != "-":
-        embed.add_field(
-          name="Next Episode", 
-          value=f"Episode {next_ep['episode']}\n{datetime.datetime.fromtimestamp(int(next_ep['airingAt']), tz = tz).strftime('%d/%m/%Y - %I:%M %p')}",
-        inline=False
-        )
-      await message.edit(embed=embed)
+
+      if type.value == 'anime':
+        if next_ep != "-":
+          embed.add_field(
+            name="Next Episode", 
+            value=f"Episode {next_ep['episode']}\n{datetime.datetime.fromtimestamp(int(next_ep['airingAt']), tz = tz).strftime('%d/%m/%Y - %I:%M %p')}",
+          inline=False
+          )
+        
+      await msg.edit(embed=embed)
       
     # Error Exceptions
     except Exception as e:
@@ -152,68 +169,8 @@ class otaku (commands.Cog):
         title=f"An Error Occured, {e}.", 
         color=self.yellow
       )
-      embed_fail.set_author(name=author)
-      await message.edit(embed=embed_fail)
-      print(e)
-
-  # mylist Command Group
-  # Main Command
-  @search.command(name='manga', aliases=['ln', 'novel', 'manhua', 'manhwa'])
-  async def _manga(self, ctx, *, inp):
-    author = "Search Manga"
-    message = await ctx.send(
-      ctx.author.mention, 
-      embed=self.create_search_embed(author, inp)
-    )
-    try:
-      # Searching
-      with HiddenPrints():
-        mangaDict = clean_dict(self.anilist.get_manga(inp))
-
-      # Variables
-      name_romaji = mangaDict['name_romaji']
-      name_english = mangaDict['name_english']
-      if name_english != "-":
-        name = name_english
-      else:
-        name = name_romaji
-      desc = truncate(clean_tags(mangaDict['desc']), 125)
-      score = mangaDict['average_score']
-      score = round(int(score)/10, 2) if score != "-" else "-"
-      thumb = mangaDict['cover_image']
-      banner = mangaDict['banner_image']
-      volume = mangaDict['volumes']
-      format = mangaDict['release_format'].lower().capitalize().replace("_", " ")
-      status = mangaDict['release_status'].lower().capitalize().replace("_", " ")
-      genre = mangaDict['genres'] if len(mangaDict['genres']) != 0 else "-"
-
-      # Editted Embed
-      embed = discord.Embed(
-        title=name, 
-        description=desc, 
-        color=self.yellow
-      )
-      embed.set_author(name=author)
-      if thumb != "-":
-        embed.set_thumbnail(url=thumb)
-      if banner != "-":
-        embed.set_image(url=banner)
-      embed.add_field(name="Format", value=format, inline=True)
-      embed.add_field(name="Score", value=f"{score}/10", inline=True)
-      embed.add_field(name="Volume", value=volume, inline=True)
-      embed.add_field(name="Genre", value=', '.join(genre), inline=False)
-      embed.add_field(name="Status", value=status, inline=True)
-
-      await message.edit(embed=embed)
-      
-    except Exception as e:
-      # Editted Embed
-      embed_fail = discord.Embed(
-        title=f"An Error Occured, {e}.", 
-        color=self.yellow
-      )
-      embed_fail.set_author(name=author)
-      await message.edit(embed=embed_fail)
+      embed_fail.set_author(name=f"{type.name} Search")
+      await msg.edit(embed=embed_fail)
       print(e)
     
   @commands.group(invoke_without_command=True)

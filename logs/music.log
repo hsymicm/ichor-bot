@@ -585,3 +585,22 @@ Traceback (most recent call last):
   File "/home/runner/DiscordBot/music3.py", line 158, in listen
     if not voice_client.is_playing():
 AttributeError: 'NoneType' object has no attribute 'is_playing'
+[2023-02-19 03:16:31,485] Function listen - ERROR name 'self' is not defined
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music3.py", line 145, in listen
+    source = await YTDLSource.from_url(music, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music3.py", line 71, in from_url
+    data = await self.search(url, loop)
+NameError: name 'self' is not defined
+[2023-02-19 03:18:09,361] Function listen - ERROR name 'search' is not defined
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music3.py", line 145, in listen
+    source = await YTDLSource.from_url(music, loop=self.client.loop, stream=True)
+  File "/home/runner/DiscordBot/music3.py", line 71, in from_url
+    data = await search(url, loop)
+NameError: name 'search' is not defined
+[2023-02-19 03:19:08,195] Function listen - ERROR from_url() missing 1 required positional argument: 'url'
+Traceback (most recent call last):
+  File "/home/runner/DiscordBot/music3.py", line 145, in listen
+    source = await YTDLSource.from_url(music, loop=self.client.loop, stream=True)
+TypeError: from_url() missing 1 required positional argument: 'url'

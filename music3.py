@@ -55,20 +55,14 @@ class YTDLSource(discord.PCMVolumeTransformer):
     self.channel = data.get('channel')
     self.thumbnail = data.get('thumbnail')
 
-  async def search(inp, *, loop=None, multiple=False):
+  # Class method for processing video
+  @classmethod
+  async def from_url(cls, url, *, loop=None, stream=False):
     loop = loop or asyncio.get_event_loop()
     # Exctract information from url/search
     data = await loop.run_in_executor(None, lambda: ytdl.extract_info(f"ytsearch1:{url}", download=not stream))
     if 'entries' in data:
       data = data['entries'][0]
-    
-    print(data)
-    return data
-
-  # Class method for processing video
-  @classmethod
-  async def from_url(cls, url, *, loop=None, stream=False):
-    data = await self.search(url, loop)
     filename = data['url'] if stream else ytdl.prepare_filename(data)
     # Returning object class
     return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
